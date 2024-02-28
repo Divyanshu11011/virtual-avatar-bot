@@ -11,12 +11,13 @@ export const TextToSpeech = () => {
   const { isPlaying, setIsPlaying } = useContext(AppContext);
   const synth = typeof window !== "undefined" ? window.speechSynthesis : null;
   const voices = synth?.getVoices();
+  console.log(voices);
 
-  const seletedVoice = voices?.find((voice) => voice.name === "Albert"); // Other voice that sounds good Karen, Tessa, Trinoids
+  const seletedVoice = voices?.find((voice) => voice.name === "Microsoft Zira - English (United States)"); // Other voice that sounds good Karen, Tessa, Trinoids
 
   const speak = (textToSpeak: string) => {
     const utterance = new SpeechSynthesisUtterance(textToSpeak);
-    utterance.rate = 0.2;
+    utterance.rate = 1;
     utterance.voice = seletedVoice!;
 
     synth?.speak(utterance);
@@ -47,29 +48,27 @@ export const TextToSpeech = () => {
     <div className="relative top-0 z-50 ">
       <form
         onSubmit={handleUserText}
-        className="absolute top-[800px] left-[30%]  space-x-2 pt-2 "
+        className="absolute top-[650px] left-[30%]  space-x-2 pt-2 "
       >
         <input
-          type="text"
-          value={userText}
-          className="bg-transparent w-[510px] border border-[#b00c3f]/80 outline-none  rounded-lg placeholder:text-[#b00c3f] p-2 text-[#b00c3f]"
-          onChange={(e) => setUserText(e.target.value)}
-          placeholder="What do you want to know human...."
-        />
-        <button
-          disabled={isLoading}
-          className="text-[#b00c3f] p-2 border border-[#b00c3f] rounded-lg disabled:text-blue-100 
-					disabled:cursor-not-allowed disabled:bg-gray-500 hover:scale-110 hover:bg-[#b00c3f] hover:text-black duration-300 transition-all"
-        >
-          {isLoading ? "thinking..." : "Ask"}
-        </button>
+  type="text"
+  value={userText}
+  className="bg-transparent w-[510px] border border-gray-300/80 outline-none rounded-lg placeholder-gray-400 p-2 text-gray-800"
+  onChange={(e) => setUserText(e.target.value)}
+  placeholder="What do you want to know, human...."
+  style={{ color: "#fff" }}
+/>
+
+<button
+  disabled={isLoading}
+  className="text-gray-800 p-2 border border-gray-300 rounded-lg disabled:text-gray-500 disabled:cursor-not-allowed disabled:bg-gray-300 hover:scale-110 hover:bg-gray-800 hover:text-white duration-300 transition-all"
+  style={{ color: "#fff" }} // Set text color to white
+>
+  {isLoading ? "thinking..." : "Ask"}
+</button>
+
       </form>
-      <div className="absolute top-3 right-3 ">
-        <Link target="_blank" href={"https://www.youtube.com/@developertak"}>
-          <Image src={yt} alt="yt" height={50} width={50} />
-        </Link>
-        <div className="absolute top-0 bg-black/60" />
-      </div>
+
     </div>
   );
 };

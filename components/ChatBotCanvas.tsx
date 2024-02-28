@@ -63,17 +63,18 @@ const Head = () => {
 
 	return (
 		<>
-			<primitive object={model.scene} scale={3} rotation-z={0.2} />
-			<Torch
+			<primitive object={model.scene} scale={5} position={[0, 0, 0]} rotation-z={0.19} />
+
+			{/* <Torch
 				depthBuffer={depthBuffer}
-				color="blue"
+				
 				position={[3, 2, 2]}
-			/>
-			<Torch
+			/> */}
+			{/* <Torch
 				depthBuffer={depthBuffer}
-				color="#b00c3f"
-				position={[-3, 2, 2]}
-			/>
+				
+				position={[3, 2, 2]}
+			/> */}
 		</>
 	);
 };
@@ -89,7 +90,7 @@ export const ChatBotCanvas = () => {
 				maxAzimuthAngle={Math.PI * 0.5}
 			/>
 			<color attach="background" args={["black"]} />
-			<ambientLight intensity={0.015} />
+			<ambientLight intensity={4} />
 			<Suspense
 				fallback={
 					<Html>
